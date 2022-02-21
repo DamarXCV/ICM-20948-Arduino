@@ -73,7 +73,7 @@ bool ICM20948::init()
     gyrRangeFactor = 1.0;
     fifoType = ICM20948_FIFO_ACC;
 
-    sleep(false);
+    wakeup();
     writeRegister8(2, ICM20948_ODR_ALIGN_EN, 1); // aligns ODR
 
     return true;
@@ -700,7 +700,7 @@ bool ICM20948::initMagnetometer()
     enableI2CMaster();
     resetMag();
     reset_ICM20948();
-    sleep(false);
+    wakeup();
     writeRegister8(2, ICM20948_ODR_ALIGN_EN, 1); // aligns ODR
     delay(10);
     enableI2CMaster();

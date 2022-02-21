@@ -48,13 +48,13 @@ void setup()
     /*  If latch is enabled the interrupt pin level is held until the interrupt status
      *  is cleared. If latch is disabled the interrupt pulse is ~50µs (default).
      */
-    myIMU.enableIntLatch(true);
+    myIMU.enableIntLatch();
 
     /* The interrupts ICM20948_FSYNC_INT, ICM20948_WOM_INT and ICM20948_DMP_INT can be
      * cleared by any read or will only be cleared if the interrupt status register is
      * read (default).
      */
-    // myIMU.enableClearIntByAnyRead(true);
+    // myIMU.enableClearIntByAnyRead();
 
     /* Set the FSync interrupt pin:
      *  ICM20948_ACT_LOW  = interrupt if low

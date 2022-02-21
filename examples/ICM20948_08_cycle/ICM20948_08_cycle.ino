@@ -76,7 +76,7 @@ void setup()
     myIMU.setGyrOffsets(-115.0, 130.0, 105.0);
 
     /* enables or disables the acceleration sensor, default: enabled */
-    // myIMU.enableAcc(false);
+    // myIMU.disableAcc();
 
     /*  ICM20948_ACC_RANGE_2G      2 g   (default)
      *  ICM20948_ACC_RANGE_4G      4 g
@@ -114,7 +114,7 @@ void setup()
     myIMU.setAccSampleRateDivider(2048);
 
     /* enables or disables the gyroscope sensor, default: enabled */
-    // myIMU.enableGyr(false);
+    // myIMU.disableGyr();
 
     /*  ICM20948_GYRO_RANGE_250       250 degrees per second (default)
      *  ICM20948_GYRO_RANGE_500       500 degrees per second
@@ -164,7 +164,7 @@ void setup()
     myIMU.enableCycle(ICM20948_ACC_GYR_I2C_MST_CYCLE);
 
     /* The Low Power Mode does not work if DLPF is enabled */
-    // myIMU.enableLowPower(true);
+    // myIMU.enableLowPower();
 
     /* In cycle mode you can set the number of measured values for the gyroscope
      * to be averaged. You can select 1,2,4,8,16,32,64 or 128:

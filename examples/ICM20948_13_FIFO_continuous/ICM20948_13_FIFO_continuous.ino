@@ -76,7 +76,7 @@ void setup()
     // myIMU.setGyrOffsets(-115.0, 130.0, 105.0);
 
     /* enables or disables the acceleration sensor, default: enabled */
-    // myIMU.enableAcc(true);
+    // myIMU.enableAcc();
 
     /*  ICM20948_ACC_RANGE_2G      2 g   (default)
      *  ICM20948_ACC_RANGE_4G      4 g
@@ -114,7 +114,7 @@ void setup()
     myIMU.setAccSampleRateDivider(10);
 
     /* enables or disables the gyroscope sensor, default: enabled */
-    // myIMU.enableGyr(false);
+    // myIMU.disableGyr();
 
     /*  ICM20948_GYRO_RANGE_250       250 degrees per second (default)
      *  ICM20948_GYRO_RANGE_500       500 degrees per second
@@ -160,13 +160,13 @@ void setup()
     /*  If latch is enabled the interrupt pin level is held until the interrupt status
      *  is cleared. If latch is disabled the interrupt pulse is ~50µs (default).
      */
-    myIMU.enableIntLatch(true);
+    myIMU.enableIntLatch();
 
     /*  The interrupts ICM20948_FSYNC_INT, ICM20948_WOM_INT and ICM20948_DMP_INT can be
      *  cleared by any read or will only be cleared if the interrupt status register is
      *  read (default).
      */
-    // myIMU.enableClearIntByAnyRead(true);
+    // myIMU.enableClearIntByAnyRead();
 
     /* The following interrupts can be enabled or disabled:
      *  ICM20948_FSYNC_INT        FSYNC pin interrupt, can't propagate to the INT pin
@@ -187,7 +187,7 @@ void setup()
     myIMU.setWakeOnMotionThreshold(128, ICM20948_WOM_COMP_DISABLE);
 
     /* enables the FIFO function, default: disabled */
-    // myIMU.enableFifo(true); // explained here, used below
+    // myIMU.enableFifo(); // explained here, used below
 
     /* There are two different FIFO modes:
      *  ICM20948_CONTINUOUS --> samples are continuously stored in FIFO. If FIFO is full
@@ -218,7 +218,7 @@ void setup()
     myIMU.readAndClearInterrupts();
     womEvent = false;
     myIMU.setFifoMode(ICM20948_CONTINUOUS);
-    myIMU.enableFifo(true);
+    myIMU.enableFifo();
     delay(100); // in some cases a delay after enabling Fifo makes sense
     myIMU.startFifo(ICM20948_FIFO_ACC_GYR);
     Serial.println("Turn your ICM20948 around the x or y axis.");

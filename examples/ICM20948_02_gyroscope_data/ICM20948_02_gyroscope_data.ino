@@ -48,7 +48,7 @@ void setup()
     // myIMU.setGyrOffsets(-115.0, 130.0, 105.0);
 
     /* enables or disables the gyroscope sensor, default: enabled */
-    // myIMU.enableGyr(false);
+    // myIMU.disableGyr();
 
     /*  ICM20948_GYRO_RANGE_250       250 degrees per second (default)
      *  ICM20948_GYRO_RANGE_500       500 degrees per second

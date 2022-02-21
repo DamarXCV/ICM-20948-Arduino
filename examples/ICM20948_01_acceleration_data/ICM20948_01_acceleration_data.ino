@@ -60,7 +60,7 @@ void setup()
     Serial.println("Done!");
 
     /* enables or disables the acceleration sensor, default: enabled */
-    // myIMU.enableAcc(true);
+    // myIMU.enableAcc();
 
     /*  ICM20948_ACC_RANGE_2G      2 g   (default)
      *  ICM20948_ACC_RANGE_4G      4 g

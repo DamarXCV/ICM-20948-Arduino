@@ -2,7 +2,7 @@
  * Example sketch for the ICM20948 library
  *
  * This sketch shows how to use the data ready interrupt. Enable the gyroscope with
- * myIMU.enableGyr(true) and see the difference.
+ * myIMU.enableGyr() and see the difference.
  *
  * Further information can be found on:
  *
@@ -69,7 +69,7 @@ void setup()
     myIMU.setGyrOffsets(-115.0, 130.0, 105.0);
 
     /* enables or disables the acceleration sensor, default: enabled */
-    // myIMU.enableAcc(false);
+    // myIMU.disableAcc();
 
     /*  ICM20948_ACC_RANGE_2G      2 g   (default)
      *  ICM20948_ACC_RANGE_4G      4 g
@@ -107,7 +107,7 @@ void setup()
     myIMU.setAccSampleRateDivider(4095);
 
     /* enables or disables the gyroscope sensor, default: enabled */
-    myIMU.enableGyr(false);
+    myIMU.disableGyr();
 
     /*  ICM20948_GYRO_RANGE_250       250 degrees per second (default)
      *  ICM20948_GYRO_RANGE_500       500 degrees per second
@@ -153,13 +153,13 @@ void setup()
     /*  If latch is enabled the interrupt pin level is held until the interrupt status
      *  is cleared. If latch is disabled the interrupt pulse is ~50µs (default).
      */
-    myIMU.enableIntLatch(true);
+    myIMU.enableIntLatch();
 
     /* The interrupts ICM20948_FSYNC_INT, ICM20948_WOM_INT and ICM20948_DMP_INT can be
      * cleared by any read or will only be cleared if the interrupt status register is
      * read (default).
      */
-    // myIMU.enableClearIntByAnyRead(true);
+    // myIMU.enableClearIntByAnyRead();
 
     /* Set the FSync interrupt pin:
      *  ICM20948_ACT_LOW  = active-low

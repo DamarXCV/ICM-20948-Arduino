@@ -79,7 +79,7 @@ void setup()
     // myIMU.setGyrOffsets(-115.0, 130.0, 105.0);
 
     /* enables or disables the acceleration sensor, default: enabled */
-    // myIMU.enableAcc(true);
+    // myIMU.enableAcc();
 
     /*  ICM20948_ACC_RANGE_2G      2 g   (default)
      *  ICM20948_ACC_RANGE_4G      4 g
@@ -117,7 +117,7 @@ void setup()
     // myIMU.setAccSampleRateDivider(10);
 
     /* enables or disables the gyroscope sensor, default: enabled */
-    // myIMU.enableGyr(false);
+    // myIMU.disableGyr();
 
     /*  ICM20948_GYRO_RANGE_250       250 degrees per second (default)
      *  ICM20948_GYRO_RANGE_500       500 degrees per second
@@ -188,7 +188,7 @@ void setup()
     // myIMU.enableCycle(ICM20948_ACC_GYR_CYCLE);
 
     /* The Low Power Mode does not work if DLPF is enabled */
-    // myIMU.enableLowPower(true);
+    // myIMU.enableLowPower();
 
     /* In low power mode you can set the number of measured values for the gyroscope
      * to be averaged. You can select 1,2,4,8,16,32,64 or 128:
@@ -208,7 +208,7 @@ void setup()
     // myIMU.setAccAverageInCycleMode(ICM20948_GYR_AVG_128);
 
     /* sleep() sends the ICM20948 to sleep or wakes it up. */
-    // myIMU.sleep(true);
+    // myIMU.sleep();
 
     /****************** Interrupts ******************/
 
@@ -221,13 +221,13 @@ void setup()
     /*  If latch is enabled the interrupt pin level is held until the interrupt status
      *  is cleared. If latch is disabled the interrupt pulse is ~50µs (default).
      */
-    // myIMU.enableIntLatch(true);
+    // myIMU.enableIntLatch();
 
     /*  The interrupts ICM20948_FSYNC_INT, ICM20948_WOM_INT and ICM20948_DMP_INT can be
      *  cleared by any read or will only be cleared if the interrupt status register is
      *  read (default).
      */
-    // myIMU.enableClearIntByAnyRead(true);
+    // myIMU.enableClearIntByAnyRead();
 
     /*  Set the FSync interrupt pin:
      *  ICM20948_ACT_LOW  = interrupt if low
@@ -256,10 +256,10 @@ void setup()
     /********************** FIFO  *************************/
 
     /* enables the FIFO function, default: disabled */
-    // myIMU.enableFifo(true);
+    // myIMU.enableFifo();
 
     /* enable or disable the FIFO function */
-    // myIMU.enableFifo(true);
+    // myIMU.enableFifo();
 
     /* There are two different FIFO modes:
      *  ICM20948_CONTINUOUS --> samples are continuously stored in FIFO. If FIFO is full
