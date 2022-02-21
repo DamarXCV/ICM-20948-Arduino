@@ -26,6 +26,7 @@
 #include <Wire.h>
 
 #define AK09916_ADDRESS 0x0C
+#define ICM20948_ADDRESS 0x69
 
 /* Registers ICM20948 USER BANK 0*/
 #define ICM20948_WHO_AM_I 0x00
@@ -240,15 +241,6 @@ typedef enum AK09916_OP_MODE {
     AK09916_CONT_MODE_100HZ = 0x08
 } AK09916_opMode;
 
-typedef enum ICM20948_ORIENTATION {
-    ICM20948_FLAT,
-    ICM20948_FLAT_1,
-    ICM20948_XY,
-    ICM20948_XY_1,
-    ICM20948_YX,
-    ICM20948_YX_1
-} ICM20948_orientation;
-
 struct xyzFloat {
     float x;
     float y;
@@ -369,7 +361,7 @@ private:
     void writeAK09916Register8(uint8_t reg, uint8_t val);
     uint8_t readAK09916Register8(uint8_t reg);
     int16_t readAK09916Register16(uint8_t reg);
-    void reset_ICM20948();
+    void resetICM20948();
     void enableI2CMaster();
     void enableMagDataRead(uint8_t reg, uint8_t bytes);
 };

@@ -55,7 +55,7 @@ bool ICM20948::init()
 {
     currentBank = 0;
 
-    reset_ICM20948();
+    resetICM20948();
     if (whoAmI() != ICM20948_WHO_AM_I_CONTENT) {
         return false;
     }
@@ -699,7 +699,7 @@ bool ICM20948::initMagnetometer()
 {
     enableI2CMaster();
     resetMag();
-    reset_ICM20948();
+    resetICM20948();
     wakeup();
     writeRegister8(2, ICM20948_ODR_ALIGN_EN, 1); // aligns ODR
     delay(10);
@@ -896,7 +896,7 @@ int16_t ICM20948::readAK09916Register16(uint8_t reg)
     return regValue;
 }
 
-void ICM20948::reset_ICM20948()
+void ICM20948::resetICM20948()
 {
     writeRegister8(0, ICM20948_PWR_MGMT_1, ICM20948_RESET);
     delay(10); // wait for registers to reset

@@ -20,7 +20,6 @@
 
 #include <ICM20948.h>
 #include <Wire.h>
-#define ICM20948_ADDR 0x69
 
 /* There are several ways to create your ICM20948 object:
  * ICM20948 myIMU = ICM20948()              -> uses Wire / I2C Address = 0x69
