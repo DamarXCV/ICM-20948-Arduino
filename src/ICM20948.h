@@ -271,11 +271,13 @@ public:
     void setAccOffsets(float xMin, float xMax, float yMin, float yMax, float zMin, float zMax);
     void setGyrOffsets(float xOffset, float yOffset, float zOffset);
     uint8_t whoAmI();
-    void enableAcc(bool enAcc);
+    void enableAcc();
+    void disableAcc();
     void setAccRange(ICM20948_accRange accRange);
     void setAccDLPF(ICM20948_dlpf dlpf);
     void setAccSampleRateDivider(uint16_t accSplRateDiv);
-    void enableGyr(bool enGyr);
+    void enableGyr();
+    void disableGyr();
     void setGyrRange(ICM20948_gyroRange gyroRange);
     void setGyrDLPF(ICM20948_dlpf dlpf);
     void setGyrSampleRateDivider(uint8_t gyrSplRateDiv);
@@ -299,27 +301,23 @@ public:
     xyzFloat getGyrValuesFromFifo();
     xyzFloat getMagValues();
 
-    /* Angles and Orientation */
-
-    xyzFloat getAngles();
-    ICM20948_orientation getOrientation();
-    String getOrientationAsString();
-    float getPitch();
-    float getRoll();
-
     /* Power, Sleep, Standby */
 
     void enableCycle(ICM20948_cycle cycle);
-    void enableLowPower(bool enLP);
+    void enableLowPower();
+    void disableLowPower();
     void setGyrAverageInCycleMode(ICM20948_gyroAvgLowPower avg);
     void setAccAverageInCycleMode(ICM20948_accAvgLowPower avg);
-    void sleep(bool sleep);
+    void sleep();
+    void wakeup();
 
     /* Interrupts */
 
     void setIntPinPolarity(ICM20948_intPinPol pol);
-    void enableIntLatch(bool latch);
-    void enableClearIntByAnyRead(bool clearByAnyRead);
+    void enableIntLatch();
+    void disableIntLatch();
+    void enableClearIntByAnyRead();
+    void disableClearIntByAnyRead();
     void setFSyncIntPolarity(ICM20948_intPinPol pol);
     void enableInterrupt(ICM20948_intType intType);
     void disableInterrupt(ICM20948_intType intType);
@@ -329,7 +327,8 @@ public:
 
     /* FIFO */
 
-    void enableFifo(bool fifo);
+    void enableFifo();
+    void disableFifo();
     void setFifoMode(ICM20948_fifoMode mode);
     void startFifo(ICM20948_fifoType fifo);
     void stopFifo();

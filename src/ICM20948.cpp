@@ -142,14 +142,17 @@ uint8_t ICM20948::whoAmI()
     return readRegister8(0, ICM20948_WHO_AM_I);
 }
 
-void ICM20948::enableAcc(bool enAcc)
+void ICM20948::enableAcc()
 {
     regVal = readRegister8(0, ICM20948_PWR_MGMT_2);
-    if (enAcc) {
-        regVal &= ~ICM20948_ACC_EN;
-    } else {
-        regVal |= ICM20948_ACC_EN;
-    }
+    regVal &= ~ICM20948_ACC_EN;
+    writeRegister8(0, ICM20948_PWR_MGMT_2, regVal);
+}
+
+void ICM20948::disableAcc()
+{
+    regVal = readRegister8(0, ICM20948_PWR_MGMT_2);
+    regVal |= ICM20948_ACC_EN;
     writeRegister8(0, ICM20948_PWR_MGMT_2, regVal);
 }
 
@@ -182,14 +185,17 @@ void ICM20948::setAccSampleRateDivider(uint16_t accSplRateDiv)
     writeRegister16(2, ICM20948_ACCEL_SMPLRT_DIV_1, accSplRateDiv);
 }
 
-void ICM20948::enableGyr(bool enGyr)
+void ICM20948::enableGyr()
 {
     regVal = readRegister8(0, ICM20948_PWR_MGMT_2);
-    if (enGyr) {
-        regVal &= ~ICM20948_GYR_EN;
-    } else {
-        regVal |= ICM20948_GYR_EN;
-    }
+    regVal &= ~ICM20948_GYR_EN;
+    writeRegister8(0, ICM20948_PWR_MGMT_2, regVal);
+}
+
+void ICM20948::disableGyr()
+{
+    regVal = readRegister8(0, ICM20948_PWR_MGMT_2);
+    regVal |= ICM20948_GYR_EN;
     writeRegister8(0, ICM20948_PWR_MGMT_2, regVal);
 }
 
@@ -382,14 +388,17 @@ void ICM20948::enableCycle(ICM20948_cycle cycle)
     writeRegister8(0, ICM20948_LP_CONFIG, regVal);
 }
 
-void ICM20948::enableLowPower(bool enLP)
+void ICM20948::enableLowPower()
 {
     regVal = readRegister8(0, ICM20948_PWR_MGMT_1);
-    if (enLP) {
-        regVal |= ICM20948_LP_EN;
-    } else {
-        regVal &= ~ICM20948_LP_EN;
-    }
+    regVal |= ICM20948_LP_EN;
+    writeRegister8(0, ICM20948_PWR_MGMT_1, regVal);
+}
+
+void ICM20948::disableLowPower()
+{
+    regVal = readRegister8(0, ICM20948_PWR_MGMT_1);
+    regVal &= ~ICM20948_LP_EN;
     writeRegister8(0, ICM20948_PWR_MGMT_1, regVal);
 }
 
@@ -406,114 +415,17 @@ void ICM20948::setAccAverageInCycleMode(ICM20948_accAvgLowPower avg)
 void ICM20948::sleep(bool sleep)
 {
     regVal = readRegister8(0, ICM20948_PWR_MGMT_1);
-    if (sleep) {
-        regVal |= ICM20948_SLEEP;
-    } else {
-        regVal &= ~ICM20948_SLEEP;
-    }
+    regVal |= ICM20948_SLEEP;
     writeRegister8(0, ICM20948_PWR_MGMT_1, regVal);
 }
 
-///////////////////////////////////////////////
-// Angles and Orientation
-///////////////////////////////////////////////
-
-xyzFloat ICM20948::getAngles()
+void ICM20948::wakeup(bool sleep)
 {
-    xyzFloat angleVal;
-    xyzFloat gVal = getGValues();
-    if (gVal.x > 1.0) {
-        gVal.x = 1.0;
-    } else if (gVal.x < -1.0) {
-        gVal.x = -1.0;
-    }
-    angleVal.x = (asin(gVal.x)) * 57.296;
-
-    if (gVal.y > 1.0) {
-        gVal.y = 1.0;
-    } else if (gVal.y < -1.0) {
-        gVal.y = -1.0;
-    }
-    angleVal.y = (asin(gVal.y)) * 57.296;
-
-    if (gVal.z > 1.0) {
-        gVal.z = 1.0;
-    } else if (gVal.z < -1.0) {
-        gVal.z = -1.0;
-    }
-    angleVal.z = (asin(gVal.z)) * 57.296;
-
-    return angleVal;
+    regVal = readRegister8(0, ICM20948_PWR_MGMT_1);
+    regVal &= ~ICM20948_SLEEP;
+    writeRegister8(0, ICM20948_PWR_MGMT_1, regVal);
 }
 
-ICM20948_orientation ICM20948::getOrientation()
-{
-    xyzFloat angleVal = getAngles();
-    ICM20948_orientation orientation = ICM20948_FLAT;
-    if (abs(angleVal.x) < 45) { // |x| < 45
-        if (abs(angleVal.y) < 45) { // |y| < 45
-            if (angleVal.z > 0) { //  z  > 0
-                orientation = ICM20948_FLAT;
-            } else { //  z  < 0
-                orientation = ICM20948_FLAT_1;
-            }
-        } else { // |y| > 45
-            if (angleVal.y > 0) { //  y  > 0
-                orientation = ICM20948_XY;
-            } else { //  y  < 0
-                orientation = ICM20948_XY_1;
-            }
-        }
-    } else { // |x| >= 45
-        if (angleVal.x > 0) { //  x  >  0
-            orientation = ICM20948_YX;
-        } else { //  x  <  0
-            orientation = ICM20948_YX_1;
-        }
-    }
-    return orientation;
-}
-
-String ICM20948::getOrientationAsString()
-{
-    ICM20948_orientation orientation = getOrientation();
-    String orientationAsString = "";
-    switch (orientation) {
-    case ICM20948_FLAT:
-        orientationAsString = "z up";
-        break;
-    case ICM20948_FLAT_1:
-        orientationAsString = "z down";
-        break;
-    case ICM20948_XY:
-        orientationAsString = "y up";
-        break;
-    case ICM20948_XY_1:
-        orientationAsString = "y down";
-        break;
-    case ICM20948_YX:
-        orientationAsString = "x up";
-        break;
-    case ICM20948_YX_1:
-        orientationAsString = "x down";
-        break;
-    }
-    return orientationAsString;
-}
-
-float ICM20948::getPitch()
-{
-    xyzFloat angleVal = getAngles();
-    float pitch = (atan2(angleVal.x, sqrt(abs((angleVal.x * angleVal.y + angleVal.z * angleVal.z)))) * 180.0) / M_PI;
-    return pitch;
-}
-
-float ICM20948::getRoll()
-{
-    xyzFloat angleVal = getAngles();
-    float roll = (atan2(angleVal.y, angleVal.z) * 180.0) / M_PI;
-    return roll;
-}
 
 ///////////////////////////////////////////////
 // Interrupts
@@ -530,25 +442,31 @@ void ICM20948::setIntPinPolarity(ICM20948_intPinPol pol)
     writeRegister8(0, ICM20948_INT_PIN_CFG, regVal);
 }
 
-void ICM20948::enableIntLatch(bool latch)
+void ICM20948::enableIntLatch()
 {
     regVal = readRegister8(0, ICM20948_INT_PIN_CFG);
-    if (latch) {
-        regVal |= ICM20948_INT_1_LATCH_EN;
-    } else {
-        regVal &= ~ICM20948_INT_1_LATCH_EN;
-    }
+    regVal |= ICM20948_INT_1_LATCH_EN;
     writeRegister8(0, ICM20948_INT_PIN_CFG, regVal);
 }
 
-void ICM20948::enableClearIntByAnyRead(bool clearByAnyRead)
+void ICM20948::disableIntLatch()
 {
     regVal = readRegister8(0, ICM20948_INT_PIN_CFG);
-    if (clearByAnyRead) {
-        regVal |= ICM20948_INT_ANYRD_2CLEAR;
-    } else {
-        regVal &= ~ICM20948_INT_ANYRD_2CLEAR;
-    }
+    regVal &= ~ICM20948_INT_1_LATCH_EN;
+    writeRegister8(0, ICM20948_INT_PIN_CFG, regVal);
+}
+
+void ICM20948::enableClearIntByAnyRead()
+{
+    regVal = readRegister8(0, ICM20948_INT_PIN_CFG);
+    regVal |= ICM20948_INT_ANYRD_2CLEAR;
+    writeRegister8(0, ICM20948_INT_PIN_CFG, regVal);
+}
+
+void ICM20948::disableClearIntByAnyRead()
+{
+    regVal = readRegister8(0, ICM20948_INT_PIN_CFG);
+    regVal &= ~ICM20948_INT_ANYRD_2CLEAR;
     writeRegister8(0, ICM20948_INT_PIN_CFG, regVal);
 }
 
@@ -695,14 +613,17 @@ void ICM20948::setWakeOnMotionThreshold(uint8_t womThresh, ICM20948_womCompEn wo
 // FIFO
 ///////////////////////////////////////////////
 
-void ICM20948::enableFifo(bool fifo)
+void ICM20948::enableFifo()
 {
     regVal = readRegister8(0, ICM20948_USER_CTRL);
-    if (fifo) {
-        regVal |= ICM20948_FIFO_EN;
-    } else {
-        regVal &= ~ICM20948_FIFO_EN;
-    }
+    regVal |= ICM20948_FIFO_EN;
+    writeRegister8(0, ICM20948_USER_CTRL, regVal);
+}
+
+void ICM20948::disableFifo()
+{
+    regVal = readRegister8(0, ICM20948_USER_CTRL);
+    regVal &= ~ICM20948_FIFO_EN;
     writeRegister8(0, ICM20948_USER_CTRL, regVal);
 }
 
