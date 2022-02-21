@@ -21,11 +21,11 @@
 
 /* There are several ways to create your ICM20948 object:
  * ICM20948 myIMU = ICM20948()              -> uses Wire / I2C Address = 0x69
- * ICM20948 myIMU = ICM20948(ICM20948_ADDR) -> uses Wire / ICM20948_ADDR
- * ICM20948 myIMU = ICM20948(&wire2)        -> uses the TwoWire object wire2 / ICM20948_ADDR
- * ICM20948 myIMU = ICM20948(&wire2, ICM20948_ADDR) -> all together
+ * ICM20948 myIMU = ICM20948(ICM20948_ADDRESS) -> uses Wire / ICM20948_ADDRESS
+ * ICM20948 myIMU = ICM20948(&wire2)        -> uses the TwoWire object wire2 / ICM20948_ADDRESS
+ * ICM20948 myIMU = ICM20948(&wire2, ICM20948_ADDRESS) -> all together
  */
-ICM20948 myIMU = ICM20948(ICM20948_ADDR);
+ICM20948 myIMU = ICM20948(ICM20948_ADDRESS);
 
 const int intPin = 2;
 volatile bool fifoFull = false;

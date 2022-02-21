@@ -25,8 +25,8 @@
 #include <Arduino.h>
 #include <Wire.h>
 
-#define AK09916_ADDRESS 0x0C
 #define ICM20948_ADDRESS 0x69
+#define AK09916_ADDRESS 0x0C
 
 /* Registers ICM20948 USER BANK 0*/
 #define ICM20948_WHO_AM_I 0x00
