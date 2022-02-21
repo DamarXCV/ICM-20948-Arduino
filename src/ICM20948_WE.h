@@ -29,7 +29,6 @@
 #endif
 
 #include <Wire.h>
-#include <SPI.h>
 
 #define AK09916_ADDRESS 0x0C
 
@@ -245,8 +244,6 @@ public:
     ICM20948_WE();
     ICM20948_WE(TwoWire *w, int addr);
     ICM20948_WE(TwoWire *w);
-    ICM20948_WE(SPIClass *s, int cs, bool spi);
-    ICM20948_WE(int cs, bool spi);  
     
    
    /* Basic settings */
@@ -338,7 +335,6 @@ public:
     
 private:
     TwoWire *_wire;
-    SPIClass *_spi;
     int i2cAddress;
     uint8_t currentBank;
     uint8_t buffer[20]; 
@@ -349,8 +345,6 @@ private:
     uint8_t gyrRangeFactor;
     uint8_t regVal;   // intermediate storage of register values
     ICM20948_fifoType fifoType;
-    int16_t csPin;
-    bool useSPI;
     void setClockToAutoSelect();
     xyzFloat correctAccRawValues(xyzFloat accRawVal);
     xyzFloat correctGyrRawValues(xyzFloat gyrRawVal);
