@@ -32,7 +32,7 @@ ICM20948::ICM20948(int addr)
 ICM20948::ICM20948()
 {
     _wire = &Wire;
-    i2cAddress = 0x68;
+    i2cAddress = 0x69;
 }
 
 ICM20948::ICM20948(TwoWire* w, int addr)
@@ -44,7 +44,7 @@ ICM20948::ICM20948(TwoWire* w, int addr)
 ICM20948::ICM20948(TwoWire* w)
 {
     _wire = w;
-    i2cAddress = 0x68;
+    i2cAddress = 0x69;
 }
 
 ///////////////////////////////////////////////
@@ -412,14 +412,14 @@ void ICM20948::setAccAverageInCycleMode(ICM20948_accAvgLowPower avg)
     writeRegister8(2, ICM20948_ACCEL_CONFIG_2, avg);
 }
 
-void ICM20948::sleep(bool sleep)
+void ICM20948::sleep()
 {
     regVal = readRegister8(0, ICM20948_PWR_MGMT_1);
     regVal |= ICM20948_SLEEP;
     writeRegister8(0, ICM20948_PWR_MGMT_1, regVal);
 }
 
-void ICM20948::wakeup(bool sleep)
+void ICM20948::wakeup()
 {
     regVal = readRegister8(0, ICM20948_PWR_MGMT_1);
     regVal &= ~ICM20948_SLEEP;

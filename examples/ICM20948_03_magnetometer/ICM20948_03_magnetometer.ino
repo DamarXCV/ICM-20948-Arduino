@@ -15,10 +15,10 @@
 
 #include <ICM20948.h>
 #include <Wire.h>
-#define ICM20948_ADDR 0x68
+#define ICM20948_ADDR 0x69
 
 /* There are several ways to create your ICM20948 object:
- * ICM20948 myIMU = ICM20948()              -> uses Wire / I2C Address = 0x68
+ * ICM20948 myIMU = ICM20948()              -> uses Wire / I2C Address = 0x69
  * ICM20948 myIMU = ICM20948(ICM20948_ADDR) -> uses Wire / ICM20948_ADDR
  * ICM20948 myIMU = ICM20948(&wire2)        -> uses the TwoWire object wire2 / ICM20948_ADDR
  * ICM20948 myIMU = ICM20948(&wire2, ICM20948_ADDR) -> all together
