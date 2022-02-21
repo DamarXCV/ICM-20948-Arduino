@@ -1,12 +1,12 @@
 #######################################
-# Syntax Coloring Map For ICM20948_WE
+# Syntax Coloring Map For ICM20948
 #######################################
 
 #######################################
 # Datatypes (KEYWORD1)
 #######################################
 
-ICM20948_WE	KEYWORD1
+ICM20948	KEYWORD1
 
 # ENUM TYPES
 ICM20948_cycle	KEYWORD1

@@ -19,8 +19,8 @@
  * 
  ******************************************************************************/
 
-#ifndef ICM20948_WE_H_
-#define ICM20948_WE_H_
+#ifndef ICM20948_H_
+#define ICM20948_H_
 
 #if (ARDUINO >= 100)
  #include "Arduino.h"
@@ -234,16 +234,16 @@ struct xyzFloat {
 };
 
 
-class ICM20948_WE
+class ICM20948
 {
 public: 
     
     /* Constructors */
     
-    ICM20948_WE(int addr);
-    ICM20948_WE();
-    ICM20948_WE(TwoWire *w, int addr);
-    ICM20948_WE(TwoWire *w);
+    ICM20948(int addr);
+    ICM20948();
+    ICM20948(TwoWire *w, int addr);
+    ICM20948(TwoWire *w);
     
    
    /* Basic settings */

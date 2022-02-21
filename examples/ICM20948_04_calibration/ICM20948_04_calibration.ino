@@ -1,5 +1,5 @@
 /***************************************************************************
-* Example sketch for the ICM20948_WE library
+* Example sketch for the ICM20948 library
 *
 * This sketch can be used to determine the (non-auto) offsets for the ICM20948. 
 * It does not use the internal offset registers.
@@ -20,16 +20,16 @@
 ***************************************************************************/
 
 #include <Wire.h>
-#include <ICM20948_WE.h>
+#include <ICM20948.h>
 #define ICM20948_ADDR 0x68
 
 /* There are several ways to create your ICM20948 object:
- * ICM20948_WE myIMU = ICM20948_WE()              -> uses Wire / I2C Address = 0x68
- * ICM20948_WE myIMU = ICM20948_WE(ICM20948_ADDR) -> uses Wire / ICM20948_ADDR
- * ICM20948_WE myIMU = ICM20948_WE(&wire2)        -> uses the TwoWire object wire2 / ICM20948_ADDR
- * ICM20948_WE myIMU = ICM20948_WE(&wire2, ICM20948_ADDR) -> all together
+ * ICM20948 myIMU = ICM20948()              -> uses Wire / I2C Address = 0x68
+ * ICM20948 myIMU = ICM20948(ICM20948_ADDR) -> uses Wire / ICM20948_ADDR
+ * ICM20948 myIMU = ICM20948(&wire2)        -> uses the TwoWire object wire2 / ICM20948_ADDR
+ * ICM20948 myIMU = ICM20948(&wire2, ICM20948_ADDR) -> all together
  */
-ICM20948_WE myIMU = ICM20948_WE(ICM20948_ADDR);
+ICM20948 myIMU = ICM20948(ICM20948_ADDR);
 
 void setup() {
   Wire.begin();
