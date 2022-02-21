@@ -1,13 +1,9 @@
 # ICM20948
 An Arduino library for the ICM-20948 9-axis accelerometer, gyroscope and magnetometer. It contains many example sketches with lots of comments to make it easy to use. It works with I2C.
 
-I have not implemented DMP features and most probably I won't do that in future. That would exceed the time I can invest. 
+Fork of: https://github.com/wollewald/ICM20948_WE
 
-You can find a documentation in my blog:
-
-https://wolles-elektronikkiste.de/icm-20948-9-achsensensor-teil-i (German)
-
-https://wolles-elektronikkiste.de/en/icm-20948-9-axis-sensor-part-i (English)
+DMP features are not implemented. 
 
 If you find bugs please inform me. If you like the library it would be great if you could give it a star.
 

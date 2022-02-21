@@ -11,6 +11,8 @@
  *
  * Written by Wolfgang (Wolle) Ewald
  *
+ * Edited by DamarXCV
+ * 
  * Further information can be found on:
  *
  * https://wolles-elektronikkiste.de/icm-20948-9-achsensensor-teil-i (German)
