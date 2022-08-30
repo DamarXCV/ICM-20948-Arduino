@@ -81,7 +81,7 @@ bool ICM20948::init()
     return true;
 }
 
-void ICM20948::autoOffsets()
+void ICM20948::autoOffsets(uint8_t runs)
 {
     xyzFloat accRawVal, gyrRawVal;
     accOffsetVal.x = 0.0;
@@ -94,32 +94,30 @@ void ICM20948::autoOffsets()
     setAccDLPF(ICM20948_DLPF_6);
     delay(100);
 
-    for (int i = 0; i < 50; i++) {
+    for (int i = 0; i < runs; i++) {
         readSensor();
+
         accRawVal = getAccRawValues();
         accOffsetVal.x += accRawVal.x;
         accOffsetVal.y += accRawVal.y;
         accOffsetVal.z += accRawVal.z;
-        delay(10);
-    }
 
-    accOffsetVal.x /= 50;
-    accOffsetVal.y /= 50;
-    accOffsetVal.z /= 50;
-    accOffsetVal.z -= 16384.0;
-
-    for (int i = 0; i < 50; i++) {
-        readSensor();
         gyrRawVal = getGyrRawValues();
         gyrOffsetVal.x += gyrRawVal.x;
         gyrOffsetVal.y += gyrRawVal.y;
         gyrOffsetVal.z += gyrRawVal.z;
-        delay(1);
+
+        delay(10);
     }
 
-    gyrOffsetVal.x /= 50;
-    gyrOffsetVal.y /= 50;
-    gyrOffsetVal.z /= 50;
+    accOffsetVal.x /= runs;
+    accOffsetVal.y /= runs;
+    accOffsetVal.z /= runs;
+    accOffsetVal.z -= 16384.0;
+
+    gyrOffsetVal.x /= runs;
+    gyrOffsetVal.y /= runs;
+    gyrOffsetVal.z /= runs;
 }
 
 void ICM20948::setAccOffsets(float xMin, float xMax, float yMin, float yMax, float zMin, float zMax)
@@ -427,7 +425,6 @@ void ICM20948::wakeup()
     regVal &= ~ICM20948_SLEEP;
     writeRegister8(0, ICM20948_PWR_MGMT_1, regVal);
 }
-
 
 ///////////////////////////////////////////////
 // Interrupts

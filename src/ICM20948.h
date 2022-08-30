@@ -12,7 +12,7 @@
  * Written by Wolfgang (Wolle) Ewald
  *
  * Edited by DamarXCV
- * 
+ *
  * Further information can be found on:
  *
  * https://wolles-elektronikkiste.de/icm-20948-9-achsensensor-teil-i (German)
@@ -261,7 +261,7 @@ public:
     /* Basic settings */
 
     bool init();
-    void autoOffsets();
+    void autoOffsets(uint8_t runs = 200);
     void setAccOffsets(float xMin, float xMax, float yMin, float yMax, float zMin, float zMax);
     void setGyrOffsets(float xOffset, float yOffset, float zOffset);
     uint8_t whoAmI();
